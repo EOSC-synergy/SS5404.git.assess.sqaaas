@@ -1,0 +1,46 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/2.1.1
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/profskipulag/SS5404:
+      branch: main
+      repo: https://github.com/profskipulag/SS5404.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/profskipulag/SS5404 git:
+        commands:
+        - /usr/bin/env sh .sqa/script.muzzy-viridian-beetle.sh
+        container: qc.acc_slimy-teal-gorilla
+  QC.Doc:
+    repos:
+      github.com/profskipulag/SS5404 find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.droopy-cardinal-mongrel.sh
+        container: qc.doc_trippy-scarlet-husky
+      github.com/profskipulag/SS5404 git:
+        commands:
+        - /usr/bin/env sh .sqa/script.cheeky-cyan-cat.sh
+        container: qc.doc_snappy-indigo-schnauzer
+      github.com/profskipulag/SS5404 markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.lumpy-auburn-lemur.sh
+        container: qc.doc_flimsy-salmon-turtle
+  QC.Lic:
+    repos:
+      github.com/profskipulag/SS5404 licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.bluesy-vermilion-pig.sh
+        container: qc.lic_geeky-goldenrod-molly
+  QC.Ver:
+    repos:
+      github.com/profskipulag/SS5404 get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.freaky-jade-ostrich.sh
+        container: qc.ver_flabby-white-llama
+timeout: 5400
